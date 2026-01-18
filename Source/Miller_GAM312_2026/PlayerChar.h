@@ -5,6 +5,7 @@
 #include "CoreMinimal.h"
 #include "GameFramework/Character.h"
 #include "Camera/CameraComponent.h"
+#include "Resource_M.h"
 #include "PlayerChar.generated.h"
 
 UCLASS()
@@ -59,15 +60,34 @@ public:
 		float Stamina = 100.0f;
 
 	UFUNCTION(BlueprintCallable)
-		void SetHealth(float amount);
+		void SetHealth(float amount); //Allows Health to Change
 
-	UFUNCTION(BlueprintCallable)
+	UFUNCTION(BlueprintCallable) //Allows Hunger to Change
 		void SetHunger(float amount);
 
-	UFUNCTION(BlueprintCallable)
+	UFUNCTION(BlueprintCallable) //Allows Stamina to Change
 		void SetStamina(float amount);
 
-	UFUNCTION()
+	UFUNCTION() //Auto Decreases All Stats
 		void DecreaseStats();
 
+	//INVENTORY RESOURCES
+
+	UPROPERTY(EditAnywhere, Category = "Resources") //Wood Item
+		int Wood;
+
+	UPROPERTY(EditAnywhere, Category = "Resources") //Stone Item
+		int Stone;
+
+	UPROPERTY(EditAnywhere, Category = "Resources") //Berry Item
+		int Berry;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Resources")
+		TArray<int> ResourcesArray;
+
+	UPROPERTY(EditAnywhere, Category = "Resources")
+		TArray<FString> ResourcesNameArray;
+
+	UFUNCTION()
+		void GiveResource(float amount, FString resourceType);
 };
