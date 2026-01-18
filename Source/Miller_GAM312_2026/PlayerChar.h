@@ -27,6 +27,7 @@ public:
 	// Called to bind functionality to input
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
 
+	//MOVEMENTS
 
 	UFUNCTION()
 		void MoveForward(float axisValue); //Move Foward and Backwards
@@ -45,5 +46,28 @@ public:
 
 	UPROPERTY(VisibleAnywhere) //Player Camera
 		UCameraComponent* PlayerCamComp;
+
+	//PLAYER STATS
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Player Stats") //Health Set at 100
+		float Health = 100.0f;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Player Stats") //Hunger Set at 100 
+		float Hunger = 100.0f;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Player Stats") //Stamina Set at 100
+		float Stamina = 100.0f;
+
+	UFUNCTION(BlueprintCallable)
+		void SetHealth(float amount);
+
+	UFUNCTION(BlueprintCallable)
+		void SetHunger(float amount);
+
+	UFUNCTION(BlueprintCallable)
+		void SetStamina(float amount);
+
+	UFUNCTION()
+		void DecreaseStats();
 
 };

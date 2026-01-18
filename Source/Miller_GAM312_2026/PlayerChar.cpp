@@ -25,6 +25,9 @@ APlayerChar::APlayerChar()
 void APlayerChar::BeginPlay()
 {
 	Super::BeginPlay();
+
+	FTimerHandle StatsTimerHandle;
+	GetWorld()->GetTimerManager().SetTimer(StatsTimerHandle, this, & APlayerChar::DecreaseStats, 2.0f, true); //Stats Auto Decrease Every 2 Sec
 	
 }
 
@@ -46,6 +49,9 @@ void APlayerChar::SetupPlayerInputComponent(UInputComponent* PlayerInputComponen
 	PlayerInputComponent->BindAction("JumpEvent", IE_Pressed, this, &APlayerChar::StartJump); //Jump When Spacebar is Pressed
 	PlayerInputComponent->BindAction("JumpEvent", IE_Released, this, &APlayerChar::StopJump); //Stop When Spacebar is Released
 }
+
+
+//PLAYER MOVEMENTS
 
 void APlayerChar::MoveForward(float axisValue)
 {
@@ -71,5 +77,41 @@ void APlayerChar::StopJump() //If Spacebar is Released, End Jump
 
 void APlayerChar::FindObject() //TBA -- Will Be RMB to Interact
 {
+}
+
+//PLAYER STATS
+
+void APlayerChar::SetHealth(float amount) //Add or Subtract Health Within 0-100
+{
+	if (Health + amount < 100) {
+		Health = Health + amount;
+	}
+}
+
+void APlayerChar::SetHunger(float amount) //Add or Subtract Hunger Within 0-100
+{
+	if (Hunger + amount < 100) {
+		Hunger = Hunger + amount;
+	}
+}
+
+void APlayerChar::SetStamina(float amount) //Add or Subtract Stamina Within 0-100
+{
+	if (Stamina + amount < 100) {
+		Stamina = Stamina + amount;
+	}
+}
+
+void APlayerChar::DecreaseStats()
+{
+	if (Hunger > 0) {
+		SetHunger(-1.0f); //Auto Hunger Decrease
+	}
+
+	SetStamina(10.0f); //Auto Stamina Renewal
+
+	if (Hunger == 0) { //If Hunger Stat is 0, Decrease Health
+		SetHealth(-3.0f);
+	}
 }
 
