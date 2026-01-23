@@ -98,7 +98,7 @@ void APlayerChar::FindObject()
 	//Collect Resource Actor, Destroy When 0
 	if (GetWorld()->LineTraceSingleByChannel(HitResult, StartLocation, EndLocation, ECC_Visibility, QueryParams)) {
 		AResource_M* HitResource = Cast<AResource_M>(HitResult.GetActor());
-		if (Stamina > 5.0f) {
+		if (Stamina > 5.0f) { //Can Only Collect With Stamina >5
 
 			if (HitResource) {
 				FString hitName = HitResource->resourceName;
@@ -114,7 +114,7 @@ void APlayerChar::FindObject()
 
 					UGameplayStatics::SpawnDecalAtLocation(GetWorld(), hitDecal, FVector(10.0f, 10.0f, 10.0f), HitResult.Location, FRotator(-90, 0, 0), 2.0f);
 
-					SetStamina(-5.0f);
+					SetStamina(-5.0f); //Depletes Stamina Per Hit
 				}
 				else {
 					HitResource->Destroy();

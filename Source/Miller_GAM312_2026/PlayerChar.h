@@ -89,7 +89,7 @@ public:
 	UPROPERTY(EditAnywhere, Category = "Resources")
 		TArray<FString> ResourcesNameArray;
 
-	UPROPERTY(EditAnywhere, Category = "HitMarker")
+	UPROPERTY(EditAnywhere, Category = "HitMarker") //Interact Decal
 		UMaterialInterface* hitDecal;
 
 	UFUNCTION()
