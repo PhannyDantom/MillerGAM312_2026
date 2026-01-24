@@ -98,7 +98,7 @@ public:
 
 	//BUILDING
 
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Building Supplies")
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Building Supplies") //Collects Building Material
 		TArray<int> BuildingArray;
 
 	UPROPERTY()
@@ -110,12 +110,12 @@ public:
 	UPROPERTY()
 		ABuildingPart* spawnedPart;
 
-	UFUNCTION(BlueprintCallable)
+	UFUNCTION(BlueprintCallable) //Add or Use Materials
 		void UpdateResources(float woodAmount, float stoneAmount, FString buildingObject);
 
-	UFUNCTION(BlueprintCallable)
+	UFUNCTION(BlueprintCallable) //Create Building 
 		void SpawnBuilding(int buildingID, bool& isSuccess);
 
-	UFUNCTION()
+	UFUNCTION() //Rotate 90
 		void RotateBuilding();
 };

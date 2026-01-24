@@ -67,7 +67,7 @@ void APlayerChar::SetupPlayerInputComponent(UInputComponent* PlayerInputComponen
 	PlayerInputComponent->BindAction("JumpEvent", IE_Pressed, this, &APlayerChar::StartJump); //Jump When Spacebar is Pressed
 	PlayerInputComponent->BindAction("JumpEvent", IE_Released, this, &APlayerChar::StopJump); //Stop When Spacebar is Released
 	PlayerInputComponent->BindAction("Interact", IE_Pressed, this, &APlayerChar::FindObject); //Interact with Object when Clicked
-	PlayerInputComponent->BindAction("RotPart", IE_Pressed, this, &APlayerChar::RotateBuilding);
+	PlayerInputComponent->BindAction("RotPart", IE_Pressed, this, &APlayerChar::RotateBuilding); //Spin Building 90
 }
 
 
@@ -201,7 +201,7 @@ void APlayerChar::GiveResource(float amount, FString resourceType)
 	}
 }
 
-void APlayerChar::UpdateResources(float woodAmount, float stoneAmount, FString buildingObject)
+void APlayerChar::UpdateResources(float woodAmount, float stoneAmount, FString buildingObject) //Stores Material Amounts 
 {
 	if (woodAmount <= ResourcesArray[0]) {
 		if (stoneAmount <= ResourcesArray[1]) {
@@ -223,7 +223,7 @@ void APlayerChar::UpdateResources(float woodAmount, float stoneAmount, FString b
 	}
 }
 
-void APlayerChar::SpawnBuilding(int buildingID, bool& isSuccess)
+void APlayerChar::SpawnBuilding(int buildingID, bool& isSuccess) //Creates Building with Stored Material
 {
 	if (!isBuilding) {
 		if (BuildingArray[buildingID] >= 1) {
@@ -246,7 +246,7 @@ void APlayerChar::SpawnBuilding(int buildingID, bool& isSuccess)
 
 }
 
-void APlayerChar::RotateBuilding()
+void APlayerChar::RotateBuilding() //Rotate 90
 {
 	if (isBuilding) {
 		spawnedPart->AddActorWorldRotation(FRotator(0, 90, 0));
