@@ -8,7 +8,9 @@
 #include "Resource_M.h"
 #include "Kismet/GameplayStatics.h"
 #include "BuildingPart.h"
+#include "PlayerWidget.h"
 #include "PlayerChar.generated.h"
+
 
 UCLASS()
 class MILLER_GAM312_2026_API APlayerChar : public ACharacter
@@ -118,4 +120,9 @@ public:
 
 	UFUNCTION() //Rotate 90
 		void RotateBuilding();
+
+	//PLAYER WIDGET
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+		UPlayerWidget* playerUI;
 };
